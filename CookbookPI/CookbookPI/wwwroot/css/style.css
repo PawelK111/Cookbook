@@ -1,0 +1,63 @@
+﻿
+
+.wrapper {
+
+    height: 915px;
+}
+.logo {
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 10px;
+}
+
+.stopka {
+    padding: 1rem;
+    background-color: #6febff;
+    text-align: center;
+}
+.maincontent {
+    padding: 20px;
+    max-width: 1200px;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+}
+.dropdown-menu {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: .2s ease all;
+}
+
+    .dropdown-menu.show {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0px);
+        transition: .2s ease all;
+    }
+
+.dropdown-item:hover {
+    background-color: #6febff;
+}
+
+.cook-book-select {
+    float: left;
+}
+
+#secondPage {
+    float: left;
+}
+
+.error-window-title {
+    color: #ff0000;
+    font-weight: bold;
+}
+.labelBgd {
+    border-radius: 10px;
+    background: #2c56f8;
+    padding: 5px;
+    color: #ffffff;
+    font-weight: bold;
+}

@@ -1,0 +1,64 @@
+﻿@model CookbookPI.Models.SignUp
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+@if (Context.Session.GetString("nickname") == null)
+{
+    if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+    {
+        <div class="alert alert-success">
+            <strong>Dziękujemy za rejestrację na naszej stronie!</strong><br />
+            Kliknij <a asp-action="SignIn" asp-controller="Account">tutaj</a>, aby się zalogować!
+        </div>
+    }
+    else
+    {
+        <h1>Zarejestruj się</h1>
+
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="SignUp" asp-controller="Account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Nick" class="control-label"></label>
+                        <input asp-for="Nick" class="form-control" />
+                        <span asp-validation-for="Nick" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Passwrd" class="control-label"></label>
+                        <input asp-for="Passwrd" class="form-control" />
+                        <span asp-validation-for="Passwrd" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPasswrd" class="control-label"></label>
+                        <input asp-for="ConfirmPasswrd" class="form-control" />
+                        <span asp-validation-for="ConfirmPasswrd" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="AcceptRules" /> @Html.DisplayNameFor(model => model.AcceptRules)
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Zarejestruj się" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+                }
+            }
+            else
+            {
+    <div class="alert alert-danger">
+        <strong>Obecnie jesteś zalogowany</strong> <br />
+        Kliknij<a asp-action="Logout" asp-controller="Account"> tutaj</a>, aby się wylogować!
+    </div>
+}
+

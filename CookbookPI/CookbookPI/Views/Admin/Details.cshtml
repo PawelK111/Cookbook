@@ -1,0 +1,59 @@
+﻿@model CookbookPI.Models.Entities.Users
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Users</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nickname)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nickname)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfRegistration)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateOfRegistration)
+        </dd>
+        <dt class = "col-sm-2">
+            Zablokowany?
+        </dt>
+        <dd class = "col-sm-10 custom-checkbox" >
+            @Html.DisplayFor(model => model.isBanned)
+        </dd>
+        <dt class = "col-sm-2">
+            Typ konta
+        </dt>
+        <dd class="col-sm-10">
+            @switch (Model.User_Permission.ID_Permission)
+            {
+                case 1:
+                    <text>Użytkownik</text>
+                    break;
+                case 2:
+                    <text>Moderator</text>
+                    break;
+                case 3:
+                    <text>Administrator</text>
+                    break;
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID_User">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
