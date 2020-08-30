@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<CookbookPI.Models.Entities.Recipes>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID_Recipe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a asp-action="RecipeInfo" asp-route-id="@item.ID_Recipe">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID_Recipe">Opcje</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

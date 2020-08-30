@@ -1,9 +1,25 @@
-﻿
+﻿.card {
+    background-color: #c1ffbc;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+div {
+    border-width: 0px;
+    border-color: white;
+    border-style: dashed;
+}
 
 .wrapper {
-
-    height: 915px;
+    min-height: 915px;
+    background-image: url("../img/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 .logo {
     text-align: center;
     color: #ffffff;
@@ -16,6 +32,7 @@
     background-color: #6febff;
     text-align: center;
 }
+
 .maincontent {
     padding: 20px;
     max-width: 1200px;
@@ -24,6 +41,7 @@
     margin-right: auto;
     padding-top: 10px;
 }
+
 .dropdown-menu {
     visibility: hidden;
     opacity: 0;
@@ -54,10 +72,120 @@
     color: #ff0000;
     font-weight: bold;
 }
+
 .labelBgd {
     border-radius: 10px;
     background: #2c56f8;
     padding: 5px;
     color: #ffffff;
     font-weight: bold;
+}
+
+html, body, .grid-container {
+    height: 100%;
+    margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto, auto, auto, auto;
+    grid-template-rows: 300px 300px 300px;
+    grid-template-areas: ". . . ." ". . . ." ". . . .";
+}
+
+    /* For presentation only, no need to copy the code below */
+    .grid-container * {
+        border: 1px dotted white;
+        position: relative;
+    }
+
+        .grid-container *:after {
+            content: attr(class);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+.photoimg {
+    background-color: lightgray;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+    .photoimg p {
+        margin: 0;
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }
+
+.img-mainmenu {
+    min-height: 200px;
+}
+
+.overlayT {
+    position: relative;
+}
+
+    .overlayT .link {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: #7dfa43;
+        left: 0px;
+        top: 0px;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .overlayT:hover .link {
+        opacity: 0.8;
+    }
+
+.icon {
+    display: block;
+    margin: 0;
+    font-size: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-decoration: none;
+    color: white;
+}
+
+    .icon p {
+        font-size: 30px;
+    }
+
+.badgeIndex {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
+    background-color: #7dfa43;
+    border-radius: 50px;
+    border: 1px solid;
+    box-shadow: 2px 4px #075c00;
+    color: #ffffff;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.badgeTitle {
+    background-color: #075c00;
+}
+
+.badgeAdmin {
+    background-color: #2c56f8;
 }

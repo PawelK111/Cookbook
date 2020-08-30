@@ -14,10 +14,10 @@ namespace CookbookPI.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly DatabaseContext db;
-        public AccountController(DatabaseContext _db)
+        private readonly DatabaseContext context;
+        public AccountController(DatabaseContext _context)
         {
-            db = _db;
+            context = _context;
         }
         [HttpGet]
         public IActionResult SignUp()
@@ -31,29 +31,22 @@ namespace CookbookPI.Controllers
             bool status = false;
             if (ModelState.IsValid)
             {
-                if (db.Users.Any(a => a.Email == newUser.Email))
+                if (context.Users.Any(a => a.Email == newUser.Email))
                 {
                     ModelState.AddModelError("Email", "Konto z podanym E-mail już istnieje!");
                     return View();
                 }
-                if (db.Users.Any(a => a.Nickname == newUser.Nick))
+                if (context.Users.Any(a => a.Nickname == newUser.Nick))
                 {
-                    ModelState.AddModelError("Nick", "Istnieje konto z podanym nickiem!");
+                    ModelState.AddModelError("Nick", "Konto z podaną nazwą użytkownika już istnieje!");
                     return View();
                 }
-                if(newUser.AcceptRules == false)
-                {
-                    ModelState.AddModelError("AcceptRules", "Musisz zaakceptować regulamin!");
-                    return View();
-                }
-
                 newUser.Passwrd = HashCryptPass.HassPass(newUser.Passwrd);
-                newUser.ConfirmPasswrd = HashCryptPass.HassPass(newUser.ConfirmPasswrd);
-                using (db)
+                using (context)
                 {
-                    Users usr = new Users(1, false, newUser.Nick, newUser.Passwrd, DateTime.Now, newUser.Email);
-                    db.Add(usr);
-                    db.SaveChanges();
+                    Users usr = new Users(1, false, newUser.Nick, newUser.Passwrd, DateTime.Now, newUser.Email, 0);
+                    context.Add(usr);
+                    context.SaveChanges();
                     status = true;
                 }
             }
@@ -76,14 +69,14 @@ namespace CookbookPI.Controllers
             if (ModelState.IsValid)
             {
                 user.Passwrd = HashCryptPass.HassPass(user.Passwrd);
-                if (db.Users.Any(a => a.Nickname == user.Nickname))
+                if (context.Users.Any(a => a.Nickname == user.Nickname))
                 {
-                    if (db.Users.Any(a => a.Passwrd == user.Passwrd))
+                    if (context.Users.Any(a => a.Passwrd == user.Passwrd))
                     {
                         HttpContext.Session.SetString("nickname", user.Nickname);
-                        var id_user = (from x in db.Users where x.Nickname == user.Nickname select x.ID_User).FirstOrDefault();
+                        var id_user = (from x in context.Users where x.Nickname == user.Nickname select x.ID_User).FirstOrDefault();
                         HttpContext.Session.SetInt32("ID_USER", id_user);
-                        var permission = (from x in db.Users where x.Nickname == user.Nickname select x.ID_Permission).FirstOrDefault();
+                        var permission = (from x in context.Users where x.Nickname == user.Nickname select x.ID_Permission).FirstOrDefault();
                         HttpContext.Session.SetInt32("Permission", permission);
                         return View(user);
                     }
@@ -95,7 +88,7 @@ namespace CookbookPI.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Nick", "Nie istnieje użytkownik z takim nickiem!");
+                    ModelState.AddModelError("Nick", "Nie istnieje użytkownik o takiej nazwie!");
                     return View();
                 }
 
@@ -110,10 +103,9 @@ namespace CookbookPI.Controllers
         }
         [HttpGet]
         [Route("Profil")]
-        public async Task<IActionResult> Profile()
+        public IActionResult Profile()
         {
-            var user = await db.Users
-                .FirstOrDefaultAsync(m => m.ID_User == HttpContext.Session.GetInt32("ID_USER"));
+            var user = context.Users.Where(m => m.ID_User == HttpContext.Session.GetInt32("ID_USER")).FirstOrDefault();
             return View(user);
         }
     }

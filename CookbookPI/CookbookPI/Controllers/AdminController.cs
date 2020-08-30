@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using CookbookPI.Models;
 using CookbookPI.Models.Entities;
 
 namespace CookbookPI.Controllers
@@ -22,24 +24,27 @@ namespace CookbookPI.Controllers
             return View();
         }
         // GET: Admin
+        [HttpGet]
         public IActionResult GetUsers()
         {
-            var databaseContext = _context.Users.Include(u => u.User_Permission);
+            var databaseContext = _context.Users.OrderByDescending(x => x.ID_Permission);
             return PartialView(databaseContext.ToList());
         }
-        public IActionResult GetRecipesNotAcc()
+        [HttpGet]
+        public IActionResult GetRecipesNotAccept()
         {
-            var databaseContext = from c in _context.Recipes where c.IsAccepted == false select c;
+            var databaseContext = _context.Recipes.Where(u => u.IsAccepted == false);
             return PartialView(databaseContext.ToList());
         }
-        public async Task<IActionResult> GetAllRecipes()
+        [HttpGet]
+        public IActionResult GetRecipesAccept()
         {
-            var databaseContext = _context.Users.Include(u => u.User_Permission);
-            return PartialView(await databaseContext.ToListAsync());
+            var databaseContext = _context.Recipes.Where(u => u.IsAccepted == true);
+            return PartialView(databaseContext.ToList());
         }
 
         // GET: Admin/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> UserInfo(int? id)
         {
             if (id == null)
             {
@@ -154,13 +159,14 @@ namespace CookbookPI.Controllers
         }
 
         // POST: Admin/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteRecipe(int? id)
         {
-            var users = await _context.Users.FindAsync(id);
-            _context.Users.Remove(users);
-            await _context.SaveChangesAsync();
+            var recipe = _context.Recipes.Find(id);
+            _context.Components.FromSql($"DELETE FROM COMPONENTS WHERE ID_RECIPE = {id}");
+            _context.Recipes.Remove(recipe);
+            _context.SaveChangesAsync();
             return RedirectToAction(nameof(AdminPanel));
         }
 

@@ -4,8 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Panel Administratora</h1>
+<h1 class="badgeIndex badgeAdmin">Panel Administratora</h1>
 
-<div class="col-10"><button class="btn btn-outline-primary" id="UsersAdminPanel">Użytkownicy</button><button class="btn btn-primary" id="RecipesAdminPanel">Przepisy niezaakceptowane</button><button class="btn btn-primary">Wszystkie przepisy</button></div>
+<div class="row justify-content-center"><button class="btn btn-primary" id="AllUsers">Użytkownicy</button><button class="btn btn-primary" id="RecipesNotAccept">Przepisy niezaakceptowane</button><button class="btn btn-primary" id="RecipesAccept">Przepisy zaakceptowane</button></div>
+<br />
 <div class="container" id="panelresult"></div>
 <script src="~/js/AdminPanel.js" type="text/javascript"></script>

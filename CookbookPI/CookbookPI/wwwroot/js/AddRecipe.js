@@ -11,15 +11,14 @@
     });
 
     $("#AddComponent").click(function () {
-        if ($("#NameOfComp").val() != "" || $("#AmountOfComp").val() != "")
-        {
+        if ($("#NameOfComp").val() != "" || $("#AmountOfComp").val() != "") {
             if ($.isNumeric($("#AmountOfComp").val())) {
                 $("#tblComponents").append('<tr><td>' +
                     $("#NameOfComp").val() + '</td><td>' +
                     $("#AmountOfComp").val() + '</td><td>' +
                     $("#unitOfMeasureComp").val() + '</td><td><button class="btn btn-danger" id="deleteComponent">-</button></td></tr>');
             }
-    }
+        }
     }
     );
 
@@ -55,6 +54,28 @@ function changePage(_x) {
 }
 
 
+sendRecipe = form => {
+    try {
+        $.ajax({
+            type: 'POST',
+            url: '/Recipes/AddRecipe/',
+            data: new FormData(form),
+            contentType: false,
+            processData: false,
+            success: function () {
+                sendComponents();
+            },
+            error: function (err) {
+                Console.log(err);
+            }
+        })
+    }
+    catch (e) {
+        console.log(e);
+    }
+    return false;
+}
+
 function sendComponents() {
     var _components = new Array();
     $("#tblComponents TBODY TR").each(function () {
@@ -74,29 +95,9 @@ function sendComponents() {
         success: function (r) {
             $('#AddRecipeForm').hide();
             $('#successAlert').show();
+        },
+        error: function (err) {
+            Console.log(err);
         }
     });
-}
-
-
-sendRecipe = form => {
-    try {
-        $.ajax({
-            type: 'POST',
-            url: '/Recipes/AddRecipe/',
-            data: new FormData(form),
-            contentType: false,
-            processData: false,
-            success: function () {
-                sendComponents();
-            },
-                error: function (err) {
-
-                }
-            })
-    }
-    catch (e) {
-        console.log(e);
-    }
-    return false;
 }

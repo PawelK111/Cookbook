@@ -16,7 +16,7 @@ namespace CookbookPI.Models.Entities
         [ForeignKey("User_Permission")]
         [Display(Name = "Typ konta")]
         public int ID_Permission { get; set; }
-        [Display(Name ="Nazwa użytkownika")]
+        [Display(Name = "Nazwa użytkownika")]
         public string Nickname { get; set; }
         public string Passwrd { get; set; }
         [Display(Name = "Adres E-Mail")]
@@ -24,10 +24,11 @@ namespace CookbookPI.Models.Entities
         [Display(Name = "Data rejestracji")]
         public DateTime DateOfRegistration { get; set; }
         public bool isBanned { get; set; }
+        public int NumberOfRecipes { get; set; }
         [Display(Name = "Typ konta")]
         public User_Permission User_Permission { get; set; }
 
-        public Users(int permissions, bool banned, string nickname, string passwrd, DateTime dateofRegistration, string email)
+        public Users(int permissions, bool banned, string nickname, string passwrd, DateTime dateofRegistration, string email, int numberRecipes)
         {
             ID_Permission = permissions;
             isBanned = banned;
@@ -35,6 +36,7 @@ namespace CookbookPI.Models.Entities
             Passwrd = passwrd;
             DateOfRegistration = dateofRegistration;
             Email = email;
+            NumberOfRecipes = numberRecipes;
         }
         public Users()
         {

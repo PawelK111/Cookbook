@@ -5,133 +5,133 @@
 }
 @if (ViewBag.ErrorStatus == true)
 {
-<div class="alert alert-danger">
-    <strong>Przepraszamy, ale obecnie nie można dodawać przepisów!</strong> <br />
-    Spróbuj ponownie później. Jeżeli problem będzie nadal występował, skontaktuj się z administratorem.<br />
-    Kliknij<a asp-action="Index" asp-controller="Home"> tutaj</a>, aby powrócić na stronę główną!
-</div>
+    <div class="alert alert-danger">
+        <strong>Przepraszamy, ale obecnie nie można dodawać przepisów!</strong> <br />
+        Spróbuj ponownie później. Jeżeli problem będzie nadal występował, skontaktuj się z administratorem.<br />
+        Kliknij<a asp-action="Index" asp-controller="Home"> tutaj</a>, aby powrócić na stronę główną!
+    </div>
 }
 else
 {
-<div id="AddRecipeForm">
-    <form asp-action="AddRecipe" onsubmit="return sendRecipe(this)" autocomplete="off" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="col-12" id="firstPage">
-            <div class="card-body">
-                <label>Tytuł przepisu: <br /></label>
-                <input asp-for="Title" type="text" class="form-control" placeholder="Wprowadź tytuł przepisu" />
-            </div>
-            <div class="card-body cook-book-select">
-                <label>Kategoria: <br /></label>
-                <select asp-for="ID_Category" asp-items="@(new SelectList(ViewBag.Category, "ID_Category", "Title"))" class="form-control"></select>
-            </div>
-            <div class="card-body cook-book-select">
-                <label>Typ kuchnii: <br /></label>
-                <select asp-for="ID_TypeOfKitchen" asp-items="@(new SelectList(ViewBag.TypeOfKitchen, "ID_TypeOfKitchen", "Title"))" class="form-control"></select>
-            </div>
+    <div id="AddRecipeForm">
+        <form asp-action="AddRecipe" onsubmit="return sendRecipe(this)" autocomplete="off" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12" id="firstPage">
+                <div class="card-body">
+                    <label>Tytuł przepisu: <br /></label>
+                    <input asp-for="Title" type="text" class="form-control" id="TitleOfRecipe" placeholder="Wprowadź tytuł przepisu" />
+                </div>
+                <div class="card-body cook-book-select">
+                    <label>Kategoria: <br /></label>
+                    <select asp-for="ID_Category" asp-items="@(new SelectList(ViewBag.Category, "ID_Category", "Title"))" class="form-control"></select>
+                </div>
+                <div class="card-body cook-book-select">
+                    <label>Kuchnia: <br /></label>
+                    <select asp-for="ID_TypeOfKitchen" asp-items="@(new SelectList(ViewBag.TypeOfKitchen, "ID_TypeOfKitchen", "Title"))" class="form-control"></select>
+                </div>
 
-            <div class="card-body cook-book-select">
-                <label>Określ poziom trudności:<br /></label>
-                <select asp-for="ID_Difficulty" asp-items="@(new SelectList(ViewBag.Difficulty, "ID_Difficulty", "Title"))" class="form-control"></select>
+                <div class="card-body cook-book-select">
+                    <label>Określ poziom trudności:<br /></label>
+                    <select asp-for="ID_Difficulty" asp-items="@(new SelectList(ViewBag.Difficulty, "ID_Difficulty", "Title"))" class="form-control"></select>
+                </div>
+                <div class="card-body cook-book-select">
+                    <label>Określ liczbę osób: <br /></label>
+                    <select asp-for="ID_NumberOfPeople" asp-items="@(new SelectList(ViewBag.NumberOfPeople, "ID_NumberOfPeople", "Amount"))" class="form-control"></select>
+                </div>
+                <div class="card-body cook-book-select">
+                    <label>Określ czas przygotowania:<br /></label>
+                    <select asp-for="ID_TimeOfPrepare" asp-items="@(new SelectList(ViewBag.TimeOfPrepares, "ID_TimeOfPrepares", "TimeOfPrepare"))" class="form-control"></select>
+                </div>
+                <div class="card-body">
+                    <label>Dodaj zdjęcie potrawy (zalecane):</label>
+                    <input asp-for="Photo" type="file" class="form-control-file" id="controlFile">
+                </div>
+                <label class="col-form-label">@ViewBag.Message</label>
             </div>
-            <div class="card-body cook-book-select">
-                <label>Określ liczbę osób: <br /></label>
-                <select asp-for="ID_NumberOfPeople" asp-items="@(new SelectList(ViewBag.NumberOfPeople, "ID_NumberOfPeople", "Amount"))" class="form-control"></select>
-            </div>
-            <div class="card-body cook-book-select">
-                <label>Określ czas przygotowania:<br /></label>
-                <select asp-for="ID_TimeOfPrepare" asp-items="@(new SelectList(ViewBag.TimeOfPrepares, "ID_TimeOfPrepares", "TimeOfPrepare"))" class="form-control"></select>
-            </div>
-            <div class="card-body">
-                <label>Dodaj zdjęcie potrawy (zalecane):</label>
-                <input asp-for="Photo" type="file" class="form-control-file" id="controlFile">
-            </div>
-            <label class="col-form-label">@ViewBag.Message</label>
-        </div>
-        <div id="secondPage" class="collapse col-form-label">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>
-                            <input type="text" placeholder="Wpisz nazwę składnika" id="NameOfComp" class="form-control" />
-                        </td>
-                        <td>
-                            <input type="text" placeholder="Ilość" id="AmountOfComp" class="form-control" />
-                        </td>
-                        <td>
-                            <select class="form-control" id="unitOfMeasureComp">
-                                <option value="gram">gram</option>
-                                <option value="sztuka">sztuka</option>
-                                <option value="szczypta">szczypta</option>
-                                <option value="łyżka">łyżka</option>
-                                <option value="łyżeczka">łyżeczka</option>
-                                <option value="szklanka">szklanka</option>
-                                <option value="litr">litr</option>
-                                <option value="plaster">plaster</option>
-                                <option value="słoik">słoik</option>
-                                <option value="opakowanie">opakowanie</option>
-                            </select>
-                        </td>
-                        <td><button type="button" class="btn btn-outline-success" id="AddComponent" data-dismiss="modal">+</button></td>
-                        <!-- <td>  <button type="button" class="btn btn-outline-danger" id="DeleteComponentRecipe" ng-click="DeleteComponent(this)" data - dismiss="modal">Usuń</button></td>   -->
-                    </tr>
-                </tbody>
-            </table>
+            <div id="secondPage" class="collapse col-lg-12">
+                <table class="table col-12">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" placeholder="Wpisz nazwę składnika" id="NameOfComp" class="form-control" />
+                            </td>
+                            <td>
+                                <input type="text" placeholder="Ilość" id="AmountOfComp" class="form-control" />
+                            </td>
+                            <td>
+                                <select class="form-control" id="unitOfMeasureComp">
+                                    <option value="gram">gram</option>
+                                    <option value="sztuka">sztuka</option>
+                                    <option value="szczypta">szczypta</option>
+                                    <option value="łyżka">łyżka</option>
+                                    <option value="łyżeczka">łyżeczka</option>
+                                    <option value="szklanka">szklanka</option>
+                                    <option value="litr">litr</option>
+                                    <option value="plaster">plaster</option>
+                                    <option value="słoik">słoik</option>
+                                    <option value="opakowanie">opakowanie</option>
+                                </select>
+                            </td>
+                            <td><button type="button" class="btn btn-outline-success" id="AddComponent" data-dismiss="modal">+</button></td>
+                            <!-- <td>  <button type="button" class="btn btn-outline-danger" id="DeleteComponentRecipe" ng-click="DeleteComponent(this)" data - dismiss="modal">Usuń</button></td>   -->
+                        </tr>
+                    </tbody>
+                </table>
 
-            <br />
-            <label>Dodane składniki:</label>
-            <table class="table" id="tblComponents">
-                <thead>
-                    <tr>
-                        <td>Nazwa</td>
-                        <td>Ilość</td>
-                        <td>J.M.</td>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-        <div id="thirdPage" class="collapse col-form-label">
-            <div class="card-body">
-                <label>Krótki opis:</label>
-                <textarea asp-for="Description" class="form-control" rows="2" style="resize:none"></textarea>
+                <br />
+                <label>Dodane składniki:</label>
+                <table class="table col-12" id="tblComponents">
+                    <thead>
+                        <tr class="font-weight-bold">
+                            <td>Nazwa</td>
+                            <td>Ilość</td>
+                            <td>J.M.</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-            <div class="card-body">
-                <label>Opisz przygotowanie potrawy:</label>
-                <textarea asp-for="Instruction" class="form-control" rows="5" style="resize:none"></textarea>
+            <div id="thirdPage" class="collapse col-form-label">
+                <div class="card-body">
+                    <label>Krótki opis:</label>
+                    <textarea asp-for="Description" class="form-control" id="DescriptionRecipe" rows="2" style="resize:none"></textarea>
+                </div>
+                <div class="card-body">
+                    <label>Opisz przygotowanie potrawy:</label>
+                    <textarea asp-for="Instruction" class="form-control" id="InstructionRecipe" rows="5" style="resize:none"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="card-body cook-book-select col-md-12" style="float: right;">
-            <button type="button" class="btn btn-outline-info collapse" id="PrevButton" data-dismiss="modal">Poprzedni</button>
-            <button type="button" class="btn btn-outline-info" id="NextButton" data-dismiss="modal" style="float: right;">Następny</button>
-            <button type="button" class="btn btn-danger collapse" float: right;" id="ErrorEndCreate" data-dismiss="modal" data-toggle="modal" data-target="#ErrorWindow">Zakończ tworzenie przepisu</button>
-            <input type="submit" class="btn btn-success collapse" float: right;" value="Zakończ tworzenie przepisu" id="EndCreateRecipe" data-dismiss="modal" />
-        </div>
-    </form>
-</div>
-<div id="successAlert" class="alert alert-success" style="display: none">
-    <strong>Udało Ci się dodać przepis!</strong> <br />
-    Kliknij <a asp-action="Index" asp-controller="Home">tutaj</a>, aby powrócić do strony głównej!
-</div>
-<div id="ErrorWindow" class="modal fade " role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header error-window-title">
-                <h4 class="modal-title">Błąd wykonania!</h4>
+            <div class="card-body cook-book-select col-md-12">
+                <button type="button" class="btn btn-outline-info collapse" id="PrevButton" data-dismiss="modal">Poprzedni</button>
+                <button type="button" class="btn btn-outline-info" id="NextButton" data-dismiss="modal" style="float: right;">Następny</button>
+                <!--<button type="button" class="btn btn-danger collapse" float: right;" id="ErrorEndCreate" data-dismiss="modal" data-toggle="modal" data-target="#ErrorWindow">Zakończ tworzenie przepisu</button>-->
+                <input type="submit" class="btn btn-success collapse" style="float:right;" value="Zakończ dodawanie przepisu" id="EndCreateRecipe" data-dismiss="modal" />
             </div>
-            <div class="modal-body">
-                Przepis nie może zostać dodany, ponieważ mogło zabraknąć następujących rzeczy:<br />
-                - tytułu przepisu<br />
-                - składników<br />
-                - opisu przygotowania<br />
-                Sprawdź czy powyższe rzeczy zostały dodane, a następnie spróbuj ponownie.<br />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
-            </div>
-        </div>
-
+        </form>
     </div>
-</div>
+    <div id="successAlert" class="alert alert-success" style="display: none">
+        <strong>Udało Ci się dodać przepis!</strong> <br />
+        Kliknij <a asp-action="Index" asp-controller="Home">tutaj</a>, aby powrócić do strony głównej!
+    </div>
+    <div id="ErrorWindow" class="modal fade " role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header error-window-title">
+                    <h4 class="modal-title">Błąd wykonania!</h4>
+                </div>
+                <div class="modal-body">
+                    Przepis nie może zostać dodany, ponieważ mogło zabraknąć następujących rzeczy:<br />
+                    - tytułu przepisu<br />
+                    - składników<br />
+                    - opisu przygotowania<br />
+                    Sprawdź czy powyższe rzeczy zostały dodane, a następnie spróbuj ponownie.<br />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 }
 <script src="~/js/AddRecipe.js" type="text/javascript"></script>

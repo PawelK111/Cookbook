@@ -21,5 +21,6 @@ namespace CookbookPI.Models.Entities
         public DbSet<TypeOfKitchen> TypeOfKitchen { get; set; }
         public DbSet<Recipes> Recipes { get; set; }
         public DbSet<Components> Components { get; set; }
+        public DbSet<FavoriteRecipes> FavoriteRecipes { get; set; }
     }
 }

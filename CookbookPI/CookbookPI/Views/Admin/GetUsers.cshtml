@@ -5,30 +5,33 @@
 @model IEnumerable<CookbookPI.Models.Entities.Users>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="table-success">
             <th>
-                @Html.DisplayNameFor(model => model.Nickname)
+                <label class="fa fa-user"> Użytkownik</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                <label class="fa fa-envelope"> E-Mail</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfRegistration)
+                <label class="fa fa-calendar"> Data rejestracji</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.User_Permission)
+                <label class="fa fa-terminal"> Typ konta</label>
             </th>
             <th>
-                Zablokowany?
+                <label class="fa fa-ban"> Zablokowany?</label>
             </th>
-            <th></th>
+            <th>
+                <label class="fa fa-search"> Szczegóły</label>
+            </th>
+            <th><label class="fa fa-cog"> Szybkie opcje</label></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="table-success">
                     @Html.DisplayFor(modelItem => item.Nickname)
                 </td>
                 <td>
@@ -38,7 +41,7 @@
                     @Html.DisplayFor(modelItem => item.DateOfRegistration)
                 </td>
                 <td>
-                    @switch (item.User_Permission.ID_Permission)
+                    @switch (item.ID_Permission)
                     {
                         case 1:
                             <text>Użytkownik</text>
@@ -52,11 +55,25 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.isBanned)
+                    @switch (item.isBanned)
+                    {
+                        case true:
+                            <text>Tak</text>
+                            break;
+                        case false:
+                            <text>Nie</text>
+                            break;
+                    }
+
                 </td>
+                <td><a class="fa fa-search btn btn-info" asp-action="UserInfo" asp-route-id="@item.ID_User"></a></td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.ID_User">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID_User">Delete</a>
+                    <select class="form-control-sm btn-outline-info">
+                        <option></option>
+                        <option>Zmień uprawnienia</option>
+                        <option>Zablokuj</option>
+                        <option>Edytuj</option>
+                    </select>
                 </td>
             </tr>
         }

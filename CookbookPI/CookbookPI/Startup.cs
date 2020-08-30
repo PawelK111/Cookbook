@@ -59,6 +59,9 @@ namespace CookbookPI
                 routes.MapRoute(
                    name: "SignIn",
                    template: "{controller=Account}/{action=SignIn}/{id?}");
+                routes.MapRoute(
+                   name: "UserInfo",
+                   template: "{controller=Admin}/{action=UserInfo}/{id?}");
             });
         }
     }

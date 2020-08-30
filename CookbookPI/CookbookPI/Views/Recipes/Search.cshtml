@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CookbookPI.Models.Entities.Recipes>
+@{
+    ViewData["Title"] = "Search";
+}
+<h1 class="badgeIndex">Wyszukaj przepisu</h1>
+<div class="justify-content-center">
+
+    <b>Szukaj na podstawie: </b>
+    <select class="form-control col-3" id="SearchBy">
+        <option value="Name">Nazwy przepisu</option>
+        <option value="User">Użytkownika</option>
+        <option value="Component">Produktu</option>
+    </select>
+    <br />
+    <input type="text" id="Search" class="form-control col-3" placeholder="wpisz tutaj" />
+    <br />
+    <button class="btn btn-success fa fa-search"> Szukaj</button>
+    <br/>
+    <table class="table table-bordered justify-content-center" style="max-width: 700px;">
+        <thead>
+            <tr></tr>
+        </thead>
+        <tbody id="DataSearching"></tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#Search").keyup(function () {
+            var SearchBy = $("#SearchBy").val();
+            var SearchValue = $("#Search").val();
+            var SetData = $("#DataSearching");
+            SetData.html("");
+            $.ajax({
+                type: 'POST',
+                url: "/Recipes/GetSearchingRecipes?SearchBy=" + SearchBy + "&SearchValue=" + SearchValue,
+                enctype: 'multipart/form-data',
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                datatype: "json",
+                success: function (result) {
+                    if (result.length == 0) {
+                        SetData.html('<tr style="color:red"><td colspan="3">Nie znaleziono przepisu!</td></tr>');
+                    }
+                    else {
+                        $.each(result, function (index, value) {
+
+                            if (SearchBy == "Component") {
+                                var Data = "<tr>" +
+                                    "<td>" + value[0].title + "</td>" +
+                                    "<td><div class='btn btn-info fa fa-search'></div></td></tr>";
+                                SetData.append(Data);
+                            }
+                            else {
+                                console.log(value);
+                                var Data = "<tr>" +
+                                    "<td>" + value.title + "</td>" +
+                                    "<td><div class='btn btn-info fa fa-search'></div></td></tr>";
+                                SetData.append(Data);
+                            }
+
+                        });
+                    }
+                }
+            })
+        });
+    });
+</script>

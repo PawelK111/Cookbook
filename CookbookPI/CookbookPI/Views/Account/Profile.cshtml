@@ -4,29 +4,29 @@
     ViewData["Title"] = "Profile";
 }
 
-<h1>Informacje o koncie</h1>
-<hr/>
+<h1 class="badgeIndex badgeTitle">Informacje o profilu</h1>
+<hr />
 <div>
     <dl class="row">
-        <dt class = "col-sm-10">
+        <dt class="col-sm-10 form-control-lg">
             @Html.DisplayNameFor(model => model.Nickname)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nickname)
         </dd>
-        <dt class = "col-sm-10">
+        <dt class="col-sm-10 form-control-lg">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        <dt class = "col-sm-10">
+        <dt class="col-sm-10 form-control-lg">
             @Html.DisplayNameFor(model => model.DateOfRegistration)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateOfRegistration)
         </dd>
-        <dt class = "col-sm-10">
+        <dt class="col-sm-10 form-control-lg">
             @Html.DisplayNameFor(model => model.ID_Permission)
         </dt>
         <dd class="col-sm-10">
@@ -43,8 +43,55 @@
                     break;
             }
         </dd>
+        <dt class="col-sm-10 form-control-lg">
+            Ilość dodanych przepisów:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfRecipes)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <button class="btn btn-primary fa fa-lock-open" id="PassBtnForm"> Zmień hasło</button> <button class="btn btn-info fa fa-user" id="PassBtnForm"> Edytuj profil</button> <button class="btn btn-success fa fa-star" id="PassBtnForm"> Ulubione przepisy</button>
+    <br />
+    <div class="row" id="changePassForm" style="display:none;">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Stare hasło:</label>
+                <input type="password" class="form-control" />
+                <span asp-validation-for="Passwrd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nowe hasło:</label>
+                <input type="password" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Powtórz hasło:</label>
+                <input type="password" class="form-control" />
+            </div>
+            <button class="btn btn-outline-success" id="changePassAcc">Potwierdź</button>
+            <button class="btn btn-outline-danger" id="changePassCancel">Anuluj</button>
+        </div>
+    </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#PassBtnForm').click(function () {
+            $('#changePassForm').animate({
+                height: 'toggle'
+            })
+            $('#PassBtnForm').animate({
+                height: 'toggle'
+            })
+        })
+        $('#changePassCancel').click(function () {
+            $('#changePassForm').animate({
+                height: 'toggle'
+            })
+            $('#PassBtnForm').animate({
+                height: 'toggle'
+            })
+        })
+    });
+</script>

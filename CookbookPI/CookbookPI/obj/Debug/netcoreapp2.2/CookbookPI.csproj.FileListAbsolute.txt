@@ -31,8 +31,12 @@ C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Deb
 C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\AdminPanel.g.cshtml.cs
 C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Create.g.cshtml.cs
 C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Delete.g.cshtml.cs
-C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Details.g.cshtml.cs
 C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\Edit.g.cshtml.cs
 C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\GetUsers.g.cshtml.cs
 C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Recipes\EndCreate.g.cshtml.cs
-C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\GetRecipesNotAcc.g.cshtml.cs
+C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\UserInfo.g.cshtml.cs
+C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Recipes\Search.g.cshtml.cs
+C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\GetRecipesAccept.g.cshtml.cs
+C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Admin\GetRecipesNotAccept.g.cshtml.cs
+C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Recipes\ListOfRecipes.g.cshtml.cs
+C:\Users\Paweł Kulewicz\Documents\GitHub\Cookbook\CookbookPI\CookbookPI\obj\Debug\netcoreapp2.2\Razor\Views\Recipes\RecipeInfo.g.cshtml.cs

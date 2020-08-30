@@ -2,7 +2,64 @@
     ViewData["Title"] = "Strona główna";
     Layout = "_Layout";
 }
-
-<body>
-
-</body>
+@{
+    int index = 0;
+    int routeid = 1;
+    List<string> categories = new List<string>()
+{
+"Przystawki","Zupy","Dania główne","Przekąski","Napoje","Desery","Wegetariańskie","Dietetyczne"
+};
+    List<string> countries = new List<string>()
+{
+"Polska","Włoska","Francuska","Chińska","Amerykańska","Brytyjska","Austriacka","Hiszpańska"
+};
+    List<string> imgCategory = new List<string>()
+{
+"przystawka.jpg","zupa.jpg","danieglowne.jpg","przekaski.jpg","napoje.jpg","deser.jpg","wegetarianskie.jpg","dietetyczne.jpg"
+};
+    List<string> imgCountry = new List<string>()
+{
+"Poland.jpg", "Italy.jpg", "France.jpg", "China.jpg", "America.jpg", "England.jpg", "/Austria.jpg", "Spain.jpg"
+};
+}
+<div class="form-recipe" style="padding-left: 20px; border-radius:20px">
+    <h1 class="text-center badgeIndex badgeTitle" style="max-width: 900px;">Witaj na stronie z przepisami kulinarnymi! </h1><hr />
+    <h3 class="text-center badgeIndex">Wybierz kategorię:</h3><hr />
+    <dl class="row" style="border-color:aqua">
+        @{
+            foreach (var item in categories)
+            {
+                <dd class="col-md-3">
+                    <div class="overlayT">
+                        <img class="img-fluid img-mainmenu" src="~/img/@imgCategory[index]" />
+                        <a asp-action="GetByCategory" asp-controller="Recipes" asp-route-id="@routeid" class="link">
+                            <span class="icon"><i class="fa fa-search"></i><p>@item</p></span>
+                        </a>
+                    </div>
+                </dd>
+                index++;
+                routeid++;
+            }
+        }
+    </dl>
+    <h3 class="text-center badgeIndex">Wybierz kuchnię świata:</h3><hr />
+    <dl class="row" style="border-color:aqua">
+        @{
+            index = 0;
+            routeid = 1;
+            foreach (var item in countries)
+            {
+                <dd class="col-md-3">
+                    <div class="overlayT">
+                        <img class="img-fluid img-mainmenu" src="~/img/@imgCountry[index]" />
+                        <a asp-action="GetByCountry" asp-controller="Recipes" asp-route-id="@routeid" class="link">
+                            <span class="icon"><i class="fa fa-search"></i><p>@item</p> </span>
+                        </a>
+                    </div>
+                </dd>
+                index++;
+                routeid++;
+            }
+        }
+    </dl>
+</div>

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<CookbookPI.Models.Entities.Recipes>
+
+@{
+    ViewData["Title"] = "Recipes";
+}
+
+<h3 class="text-center badgeIndex">@ViewBag.Category</h3>
+
+<table class="table">
+    <thead>
+        <tr class="table-info">
+            <th>
+                <label class="fa fa-info-circle" style="font-size: 20px;"> @Html.DisplayNameFor(model => model.Title)</label>
+            </th>
+            <th>
+                <label class="fas fa-user" style="font-size: 20px;"> Autor</label>
+            </th>
+            <th>
+                <label class="fas fa-clock" style="font-size: 20px;"> Czas przygotowania</label>
+            </th>
+            <th>
+                <label class="fa" style="font-size: 20px;"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="4" height="5" x="1" y="10" rx="1" />
+                            <rect width="4" height="9" x="6" y="6" rx="1" />
+                                <rect width="4" height="14" x="11" y="1" rx="1" />
+                </svg> Poziom trudności</label>
+            </th>
+            <th>
+                <label class="fa fa-scroll" style="font-size: 20px;"> Pełny opis</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="table-success">
+                    <label style="font-size:15px;">@Html.DisplayFor(modelItem => item.Title)</label>
+                </td>
+                <td>
+                  @ViewBag.User
+                </td>
+                <td>
+                    @switch (item.ID_Difficulty)
+                    {
+                        case 1:
+                            <text>Poniżej 15 minut</text>
+                            break;
+                        case 2:
+                            <text>15 minut</text>
+                            break;
+                        case 3:
+                            <text>30 minut</text>
+                            break;
+                        case 4:
+                            <text>45 minut</text>
+                            break;
+                        case 5:
+                            <text>60 minut</text>
+                            break;
+                        case 6:
+                            <text>90 minut</text>
+                            break;
+                        case 7:
+                            <text>Ponad 90 minut</text>
+                            break;
+                    }
+                </td>
+                <td>
+                    @switch (item.ID_Difficulty)
+                    {
+                        case 1:
+                            <text>Łatwy</text>
+                            break;
+                        case 2:
+                            <text>Średni</text>
+                            break;
+                        case 3:
+                            <text>Trudny</text>
+                            break;
+
+                    }
+                </td>
+                <td>
+                    <a class="fa fa-search btn btn-success" asp-action="RecipeInfo" asp-route-id="@item.ID_Recipe"> Podgląd</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -13,10 +13,11 @@ namespace CookbookPI.Models.Entities
     public class Recipes
     {
         [Key]
-        public int ? ID_Recipe { get; set; }
+        public int? ID_Recipe { get; set; }
         [ForeignKey("Users")]
-        public int ? ID_User { get; set; }
-      //  [Required(ErrorMessage = "Wprowadź tytuł przepisu")]
+        public int? ID_User { get; set; }
+        //  [Required(ErrorMessage = "Wprowadź tytuł przepisu")]
+        [DisplayName("Nazwa przepisu")]
         public string Title { get; set; }
         [ForeignKey("TypeOfKitchen")]
         public int ID_TypeOfKitchen { get; set; }
@@ -29,9 +30,9 @@ namespace CookbookPI.Models.Entities
         [ForeignKey("TimeOfPrepares")]
         public int ID_TimeOfPrepare { get; set; }
         public bool IsAccepted { get; set; }
-      //  [Required(ErrorMessage = "Wprowadź krótki opis")]
+        //  [Required(ErrorMessage = "Wprowadź krótki opis")]
         public string Description { get; set; }
-     //   [Required(ErrorMessage = "Wprowadź sposób wykonania przepisu")]
+        //   [Required(ErrorMessage = "Wprowadź sposób wykonania przepisu")]
         public string Instruction { get; set; }
         public byte[] Photo { get; set; }
         public Users Users { get; set; }
