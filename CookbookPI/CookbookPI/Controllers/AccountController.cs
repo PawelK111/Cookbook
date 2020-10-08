@@ -68,16 +68,14 @@ namespace CookbookPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                user.Passwrd = HashCryptPass.HassPass(user.Passwrd);
                 if (context.Users.Any(a => a.Nickname == user.Nickname))
                 {
-                    if (context.Users.Any(a => a.Passwrd == user.Passwrd))
+                    var currentAccount = context.Users.SingleOrDefault(a => a.Nickname.Equals(user.Nickname));
+                    if (HashCryptPass.ValidatePass(user.Passwrd, currentAccount.Passwrd))
                     {
-                        HttpContext.Session.SetString("nickname", user.Nickname);
-                        var id_user = (from x in context.Users where x.Nickname == user.Nickname select x.ID_User).FirstOrDefault();
-                        HttpContext.Session.SetInt32("ID_USER", id_user);
-                        var permission = (from x in context.Users where x.Nickname == user.Nickname select x.ID_Permission).FirstOrDefault();
-                        HttpContext.Session.SetInt32("Permission", permission);
+                        HttpContext.Session.SetString("nickname", currentAccount.Nickname);
+                        HttpContext.Session.SetInt32("ID_USER", currentAccount.ID_User);
+                        HttpContext.Session.SetInt32("ID_Permission", currentAccount.ID_Permission);
                         return View(user);
                     }
                     else
@@ -91,7 +89,6 @@ namespace CookbookPI.Controllers
                     ModelState.AddModelError("Nick", "Nie istnieje użytkownik o takiej nazwie!");
                     return View();
                 }
-
             }
             return View();
         }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CookbookPI.Models;
 using CookbookPI.Models.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace CookbookPI.Controllers
 {
@@ -21,8 +22,17 @@ namespace CookbookPI.Controllers
         }
         public IActionResult AdminPanel()
         {
+            if (HttpContext.Session.GetInt32("ID_Permission") != 2)
+            {
+                ///<summary>
+                ///Jeżeli użytkownik nie posiada ID uprawnień - 2 (Administrator),
+                ///nastąpi przekierowanie na stronę główną
+                /// </summary>
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
+
         // GET: Admin
         [HttpGet]
         public IActionResult GetUsers()

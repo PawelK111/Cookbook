@@ -65,10 +65,10 @@ namespace CookbookPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByCategory(int? id)
         {
-            ViewBag.User = (from c1 in _context.Users
-                            join c2 in _context.Recipes on c1.ID_User equals c2.ID_User
-                            where c2.ID_Recipe == id
-                            select c1.Nickname).First();
+            //ViewBag.User = (from c1 in _context.Users
+            //                join c2 in _context.Recipes on c1.ID_User equals c2.ID_User
+            //                where c2.ID_Recipe == id
+            //                select c1.Nickname).First();
             ViewBag.Category = _context.Categories.Where(x => x.ID_Category == id).Select(x => x.Title).First();
             var databaseContext = _context.Recipes.Where(x => x.ID_Category == id && x.IsAccepted == true);
             return View("ListOfRecipes", await databaseContext.ToListAsync());
@@ -77,10 +77,10 @@ namespace CookbookPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByCountry(int? id)
         {
-            ViewBag.User = (from c1 in _context.Users
-                            join c2 in _context.Recipes on c1.ID_User equals c2.ID_User
-                            where c2.ID_Recipe == id
-                            select c1.Nickname).First();
+            //ViewBag.User = (from c1 in _context.Users
+            //                join c2 in _context.Recipes on c1.ID_User equals c2.ID_User
+            //                where c2.ID_Recipe == id
+            //                select c1.Nickname).First();
             ViewBag.Category = _context.TypeOfKitchen.Where(x => x.ID_TypeOfKitchen == id).Select(x => x.Title).First();
             var databaseContext = _context.Recipes.Where(x => x.ID_TypeOfKitchen == id && x.IsAccepted == true);
             return View("ListOfRecipes", await databaseContext.ToListAsync());
@@ -120,7 +120,6 @@ namespace CookbookPI.Controllers
             {
                 try
                 {
-
                     foreach (var item in Photo)
                     {
                         if (item.Length > 0)
@@ -131,7 +130,7 @@ namespace CookbookPI.Controllers
                             }
                     }
                     recipe.ID_User = HttpContext.Session.GetInt32("ID_USER");
-                    var numberRecipes = _context.Users.Where(x => x.ID_User == recipe.ID_User).Select(y => y.NumberOfRecipes).FirstOrDefault();
+                    var numberRecipes = _context.Users.Where(x => x.ID_User == recipe.ID_User).Select(y => y.NumberOfRecipes).FirstOrDefault() + 1;
                     ViewBag.Status = true;
                     _context.Add(recipe);
                     _context.SaveChanges();
